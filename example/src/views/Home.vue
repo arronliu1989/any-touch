@@ -115,26 +115,27 @@ export default {
     },
 
     mounted() {
-        AnyTouch.use(AnyTouch.Tap, { name: 'doubletap', tapTimes: 2 });
         const at = AnyTouch(this.$refs.panel, { isPreventDefault: true });
+        // at.use(AnyTouch.Tap, { name: 'doubletap', tapTimes: 2 });
 
-        let timeID = null;
-        at.beforeEach((a, next) => {
-            if ('tap' === a.name) {
-                clearTimeout(timeID);
-                timeID = setTimeout(() => {
-                    // console.log(a.status, at.recognizerMap.doubletap[0].status);
-                    const ok = [AnyTouch.STATUS_POSSIBLE, AnyTouch.STATUS_FAILED].includes(
-                        at.recognizerMap.doubletap.status
-                    );
-                    if (ok) {
-                        next();
-                    }
-                }, 300);
-            } else {
-                next();
-            }
-        });
+        // let timeID = null;
+        // at.beforeEach((a, next) => {
+        //     if ('tap' === a.name) {
+        //         clearTimeout(timeID);
+        //         timeID = setTimeout(() => {
+        //             // console.log(a.status, at.recognizerMap.doubletap[0].status);
+        //             const ok = [AnyTouch.STATUS_POSSIBLE, AnyTouch.STATUS_FAILED].includes(
+        //                 at.recognizerMap.doubletap.status
+        //             );
+        //             if (ok) {
+        //                 next();
+        //             }
+        //         }, 300);
+        //     } else {
+        //         next();
+        //     }
+        // });
+        
         at.on('at:after', this.afterEach);
         at.on('doubletap', (e) => {
             console.log(`doubletap`);
