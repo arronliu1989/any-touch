@@ -69,7 +69,6 @@ export function createAnyTouch(plugins: RecognizerFunction[] = []) {
     function AnyTouch(el?: HTMLElement, options?: Options) {
         const [on, off, $emit, destroyAE] = AnyEvent<AnyTouchEvent>();
 
-
         let _options = { ...DEFAULT_OPTIONS, ...options };
         let _beforeEachHook: BeforeEachHook;
 
@@ -136,10 +135,10 @@ export function createAnyTouch(plugins: RecognizerFunction[] = []) {
             const recognizer = plugin(recognizerOptions)
             recognizers.push(recognizer);
             const { name } = recognizer[0];
+            const computeFunctions = recognizer[2]
             recognizerMap[name] = recognizer[0];
             // 计算函数集合
-            // _computeFunctionMap[]
-            plugin.C.forEach(computeWrapFunction => {
+            computeFunctions.forEach(computeWrapFunction => {
                 const { _id } = computeWrapFunction
                 // 初始化计算函数
                 _computeFunctionMap[_id] = computeWrapFunction();

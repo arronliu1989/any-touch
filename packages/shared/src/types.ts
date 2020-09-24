@@ -53,17 +53,14 @@ export type RecognizerContext<DEFAULT_OPTIONS = any> = RecognizerOptions<DEFAULT
 /**
  * 识别器实例
  */
-export type Recognizer = [RecognizerContext, (computed: Computed, emit: EventTrigger) => void];
+export type Recognizer = [RecognizerContext, (computed: Computed, emit: EventTrigger) => void, ComputeWrapFunction[]];
 
 /**
  * 识别器构造函数
  */
 export interface RecognizerFunction {
-    C: ComputeWrapFunction[];
     (options?: RecognizerOptions): Recognizer;
 }
-
-
 
 /**
  * 适配器支持的事件类型
