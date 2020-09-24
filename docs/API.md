@@ -127,7 +127,7 @@ at.set({ isPreventDefault: true });
 加载手势识别器, options 为手势识别器的参数.
 
 ```javascript
-AnyTouch.use(AnyTouch.Tap, { tapTime: 2, name: 'doubletap' });
+at.use(AnyTouch.Tap, { tapTime: 2, name: 'doubletap' });
 ```
 
 [返回目录](#目录)
@@ -140,8 +140,6 @@ AnyTouch.use(AnyTouch.Tap, { tapTime: 2, name: 'doubletap' });
 
 ```javascript
 at.removeUse('doubletap');
-// 也可在初始化之前清空默认已加载识别器
-AnyTouch.removeUse();
 ```
 
 [返回目录](#目录)
@@ -200,9 +198,9 @@ import AnyTouch from '@any-touch/core';
 import Tap from '@any-touch/tap';
 // 如果引入的是完整版, 那么STATUS_POSSIBLE等可以直接通过AnyTouch.STATUS_POSSIBLE获取
 import { STATUS_POSSIBLE, STATUS_FAILED } from '@any-touch/shared';
-AnyTouch.use(Tap);
-AnyTouch.use(Tap, { name: 'doubletap', tapTimes: 2 });
 const at = AnyTouch(el);
+at.use(Tap);
+at.use(Tap, { name: 'doubletap', tapTimes: 2 });
 
 // 🚀关键代码
 // beforeEach

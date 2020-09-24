@@ -18,7 +18,7 @@ import Pinch from '@any-touch/pinch';
 import Rotate from '@any-touch/rotate';
 import { RecognizerFunction, RECOGNIZER_STATUS } from '@any-touch/shared';
 
-interface AnyTouchFunction extends ReturnType<typeof createAnyTouch>{
+interface AnyTouchFunction extends ReturnType<typeof createAnyTouch> {
     Tap: RecognizerFunction;
     Pan: RecognizerFunction;
     Swipe: RecognizerFunction;
@@ -34,8 +34,7 @@ interface AnyTouchFunction extends ReturnType<typeof createAnyTouch>{
     STATUS_RECOGNIZED: RECOGNIZER_STATUS.RECOGNIZED;
 }
 
-
-const AnyTouch = createAnyTouch([Tap, Pan, Swipe, Press, Pinch, Rotate]) as Partial<AnyTouchFunction>;
+const AnyTouch = createAnyTouch([Tap, Pan, Swipe, Press, Pinch, Rotate]) as AnyTouchFunction;
 AnyTouch.Tap = Tap;
 AnyTouch.Pan = Pan;
 AnyTouch.Swipe = Swipe;

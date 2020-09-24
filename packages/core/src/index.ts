@@ -67,7 +67,9 @@ const DEFAULT_OPTIONS: Options = {
 
 export function createAnyTouch(plugins: RecognizerFunction[] = []) {
     function AnyTouch(el?: HTMLElement, options?: Options) {
-        const [$on, $off, $emit, anyEventDestroy] = AnyEvent<AnyTouchEvent>();
+        const [on, off, $emit, destroyAE] = AnyEvent<AnyTouchEvent>();
+
+
         let _options = { ...DEFAULT_OPTIONS, ...options };
         let _beforeEachHook: BeforeEachHook;
 
@@ -115,7 +117,7 @@ export function createAnyTouch(plugins: RecognizerFunction[] = []) {
                 window.addEventListener('_', () => void 0, opts);
             } catch { }
             // 绑定元素
-            $on(
+            on(
                 'unbind',
                 bindElement(
                     el,
@@ -232,7 +234,7 @@ export function createAnyTouch(plugins: RecognizerFunction[] = []) {
         function target(el: HTMLElement) {
             return {
                 on: (eventName: string, listener: Listener<AnyTouchEvent>): void => {
-                    $on(eventName, listener, event => {
+                    on(eventName, listener, event => {
                         const { targets } = event;
                         // 检查当前触发事件的元素是否是其子元素
                         return event.target === el &&
@@ -287,7 +289,7 @@ export function createAnyTouch(plugins: RecognizerFunction[] = []) {
         function destroy() {
             // 解绑事件
             $emit('unbind');
-            anyEventDestroy();
+            destroyAE();
         };
 
         return {
@@ -301,8 +303,8 @@ export function createAnyTouch(plugins: RecognizerFunction[] = []) {
             recognizers,
             recognizerMap,
             catchEvent,
-            on: $on,
-            off: $off
+            on,
+            off
         };
     }
 
